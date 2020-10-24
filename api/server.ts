@@ -1,3 +1,4 @@
+// @ts-ignore
 const express = require('express');
 const bodyParser = require('body-parser');
 const compress = require('compression');
@@ -27,9 +28,18 @@ server.use(cors());
 
 // mount api v1 routes
 server.use('/api/v1', routes);
-server.use('/*', (req, res) => {
+
+server.use('/*', (req: any, res: any) => {
   res.status(404);
   res.json({ error: 'Not found' });
 });
 
-module.exports = server;
+require('reflect-metadata');
+
+const port = process.env.port || 4000;
+
+server.listen(port, () => {
+  console.info(`Server started on port ${port}`);
+});
+
+module.exports.default = server;
