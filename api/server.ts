@@ -1,9 +1,13 @@
+import {Request, Response} from "express";
+import {QuoteController} from "./controllers/QuoteController";
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const compress = require('compression');
 const cors = require('cors');
 const helmet = require('helmet');
 const routes = require('./v1/router');
+const quoteController = new QuoteController();
 require('dotenv').config()
 
 /**
@@ -25,8 +29,15 @@ server.use(helmet());
 // enable CORS - Cross Origin Resource Sharing
 server.use(cors());
 
-// mount api v1 routes
-server.use('/api/v1', routes);
+server.get('/quotes', async (req: Request, res: Response) => {
+  const quotes = await quoteController.all();
+  res.json({ quotes });
+});
+
+server.get('/quote/:id', async (req: Request, res: Response) => {
+  const quotes = await quoteController.one(req);
+  res.json({ quotes });
+});
 
 server.use('/*', (req: any, res: any) => {
   res.status(404);
