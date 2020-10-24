@@ -1,0 +1,14 @@
+.card-quick-quote {
+  h2 {
+    margin-bottom: 15px;
+  }
+
+  .MuiFormControl-root, .MuiInputBase-root {
+    width: 100% !important;
+    margin-bottom: 30px;
+
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+}

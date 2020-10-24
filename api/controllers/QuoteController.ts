@@ -1,7 +1,6 @@
-import { getRepository } from 'typeorm';
 import { Request } from 'express';
 import { Quote } from '../entities/Quote';
-import database from "../database";
+import database from '../database';
 
 export class QuoteController {
   private quoteRepository;

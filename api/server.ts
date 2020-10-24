@@ -6,7 +6,6 @@ const bodyParser = require('body-parser');
 const compress = require('compression');
 const cors = require('cors');
 const helmet = require('helmet');
-const routes = require('./v1/router');
 const quoteController = new QuoteController();
 require('dotenv').config()
 
@@ -35,8 +34,8 @@ server.get('/quotes', async (req: Request, res: Response) => {
 });
 
 server.get('/quote/:id', async (req: Request, res: Response) => {
-  const quotes = await quoteController.one(req);
-  res.json({ quotes });
+  const quote = await quoteController.one(req);
+  res.json({ quote });
 });
 
 server.use('/*', (req: any, res: any) => {
