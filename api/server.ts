@@ -5,12 +5,12 @@ const compress = require('compression');
 const cors = require('cors');
 const helmet = require('helmet');
 const routes = require('./v1/router');
+require('dotenv').config()
 
 /**
  * Express instance
  * @public
  */
-
 const server = express();
 
 // parse body params and attache them to req.body
