@@ -1,48 +1,80 @@
-import React from 'react';
-import {Card, CardContent, Grid, Paper, Typography} from '@material-ui/core';
+import React, {useEffect, useState} from 'react';
+import {Card, CardContent, CardHeader, Grid} from '@material-ui/core';
 import './Dashboard.scss';
-import {TransportationType} from '../../utils/enums';
+import {ApiMethod, TransportationType} from '../../utils/enums';
 import QuickQuoteForm from './QuickQuoteForm';
 import {InitialQuoteFormValues} from '../../utils/interfaces';
 import PendingQuotesTable from "./PendingQuotesTable";
+import useApiRequest from "../../hooks/useApiRequest";
+import {QuotesResponse} from "../../../api/interfaces/quotes";
+import {Quote} from "../../../api/entities/Quote";
+import apiRequest from "../../utils/apiRequest";
 
 const initialValues: InitialQuoteFormValues = {
-  from: '',
-  destination: '',
-  depart_date: '',
-  return_date: '',
-  people: 1,
-  transportation: TransportationType.PLANE,
+  depart_origin: '',
+  depart_destination: '',
+  origin_datetime: '',
+  destination_datetime: '',
+  number_people: 1,
+  transportation: TransportationType.CAR,
   name: '',
 };
 
-const createQuote = (values: InitialQuoteFormValues) => {
-  console.log('Submit form', values);
-};
-
 const Dashboard = () => {
+  const [ tableRows, setTableRows ] = useState<Quote[]>([]);
+  const [ formSubmitted, setFormSubmitted ] = useState(false);
+  const { response: quoteResponse } = useApiRequest<QuotesResponse>('quotes', ApiMethod.GET);
+
+  useEffect(() => {
+    // If the api request returned data, use it to set the table rows
+    if (quoteResponse?.data) {
+      setTableRows(quoteResponse.data.quotes);
+    }
+  }, [quoteResponse]);
+
+  const createQuote = (values: InitialQuoteFormValues) => {
+    apiRequest('quote', ApiMethod.POST, values).then((response) => {
+      setTableRows((tableRows: any) => {
+        // Remove the last item from the table to make room for the new one
+        tableRows.pop();
+
+        // Append the newly created quote to the table
+        return [
+          ...[response.data],
+          ...tableRows,
+        ];
+      });
+      setFormSubmitted(true);
+
+      // Set the form submitted to false after 5 seconds to get rid of the success message
+      setTimeout(() => {
+        setFormSubmitted(false);
+      }, 5000);
+    }).catch((error) => {
+      console.error('Create quote error', error);
+    });
+  };
+
   return (
     <Grid container spacing={3}>
       <Grid item sm={12} md={6}>
         <Card className="card-quick-quote" variant="outlined">
+          <CardHeader title="Quick Quote" />
           <CardContent>
-            <Typography variant="h5" component="h2">
-              Quick Quote
-            </Typography>
-
-            <QuickQuoteForm initialValues={initialValues} onSubmit={createQuote} />
+            <QuickQuoteForm
+              initialValues={initialValues}
+              onSubmit={createQuote}
+              formSubmitted={formSubmitted}
+            />
           </CardContent>
         </Card>
       </Grid>
 
       <Grid item sm={12} md={6}>
         <Card className="card-quick-quote" variant="outlined">
+          <CardHeader title="Pending Quotes" />
           <CardContent>
-            <Typography variant="h5" component="h2">
-              Pending Quotes
-            </Typography>
-
-            <PendingQuotesTable />
+            <PendingQuotesTable tableRows={tableRows} />
           </CardContent>
         </Card>
       </Grid>

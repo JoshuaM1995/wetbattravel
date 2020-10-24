@@ -1,11 +1,11 @@
 import { TransportationType } from './enums';
 
 export interface InitialQuoteFormValues {
-  from: string;
-  destination: string;
-  depart_date: string;
-  return_date: string;
-  people: number;
-  transportation: TransportationType;
+  depart_origin: string;
+  depart_destination: string;
+  origin_datetime: string;
+  destination_datetime: string;
+  number_people: number;
+  transportation: TransportationType|string;
   name: string;
 }

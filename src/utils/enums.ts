@@ -1,5 +1,12 @@
 export enum TransportationType {
-  PLANE = 'Plane',
-  BOAT = 'Boat',
+  RENTAL = 'Rental',
   CAR = 'Car',
+}
+
+export enum ApiMethod {
+  GET = 'GET',
+  POST = 'POST',
+  PUT = 'PUT',
+  PATCH = 'PATCH',
+  DELETE = 'DELETE',
 }

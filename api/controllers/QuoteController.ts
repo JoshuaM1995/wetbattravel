@@ -1,9 +1,11 @@
 import { Request } from 'express';
 import { Quote } from '../entities/Quote';
 import database from '../database';
+import * as faker from 'faker';
+import { Repository } from 'typeorm';
 
 export class QuoteController {
-  private quoteRepository;
+  private quoteRepository: Repository<Quote>;
 
   constructor() {
     database.then((connection) => {
@@ -12,7 +14,10 @@ export class QuoteController {
   }
 
   async all(): Promise<Quote[]> {
-    return await this.quoteRepository.find();
+    return await this.quoteRepository.find({
+      order: { id: 'DESC' },
+      take: 10,
+    });
   }
 
   async one(request: Request) {
@@ -20,6 +25,12 @@ export class QuoteController {
   }
 
   async save(request: Request) {
-    return await this.quoteRepository.save(request.body);
+    // "Calculate" the price and add it to the request body
+    const quoteData = {
+      ...request.body,
+      price: faker.random.number({ min: 1, max: 1000 }),
+    };
+
+    return await this.quoteRepository.save(quoteData);
   }
 }

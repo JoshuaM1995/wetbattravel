@@ -28,14 +28,19 @@ server.use(helmet());
 // enable CORS - Cross Origin Resource Sharing
 server.use(cors());
 
-server.get('/quotes', async (req: Request, res: Response) => {
+server.get('/api/quotes', async (req: Request, res: Response) => {
   const quotes = await quoteController.all();
   res.json({ quotes });
 });
 
-server.get('/quote/:id', async (req: Request, res: Response) => {
+server.get('/api/quote/:id', async (req: Request, res: Response) => {
   const quote = await quoteController.one(req);
   res.json({ quote });
+});
+
+server.post('/api/quote/', async (req: Request, res: Response) => {
+  const quote = await quoteController.save(req);
+  res.json(quote);
 });
 
 server.use('/*', (req: any, res: any) => {
