@@ -5,7 +5,9 @@
    "scripts": {
       "start": "ts-node src/index.ts",
       "start:dev": "nodemon ./server.ts",
-      "typeorm": "node --require ts-node/register ./node_modules/typeorm/cli.js"
+      "typeorm": "node --require ts-node/register ./node_modules/typeorm/cli.js",
+      "seed:config": "ts-node ./node_modules/typeorm-seeding/dist/cli.js config",
+      "seed:run": "ts-node ./node_modules/typeorm-seeding/dist/cli.js seed"
    },
    "dependencies": {
       "body-parser": "^1.19.0",
@@ -15,19 +17,24 @@
       "debug": "~2.6.9",
       "dotenv": "^8.2.0",
       "express": "~4.16.1",
+      "faker": "^5.1.0",
       "helmet": "^4.1.1",
       "http-errors": "~1.6.3",
       "jade": "~1.11.0",
+      "moment": "^2.29.1",
       "morgan": "^1.9.1",
+      "mysql": "^2.14.1",
       "nodemon": "^2.0.6",
       "pg": "^8.4.1",
       "reflect-metadata": "^0.1.10",
       "typeorm": "0.2.28",
-      "mysql": "^2.14.1"
+      "typeorm-seeding": "^1.6.1"
    },
    "devDependencies": {
       "@types/dotenv": "^8.2.0",
       "@types/express": "^4.17.8",
+      "@types/faker": "^5.1.3",
+      "@types/moment": "^2.13.0",
       "@types/node": "^8.0.29",
       "@types/nodemon": "^1.19.0",
       "ts-node": "3.3.0",

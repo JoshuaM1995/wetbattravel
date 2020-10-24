@@ -34,7 +34,11 @@ DB_PORT=5432
 In the **/api/** directory, you can run the following command to create the database schema:
 
 ### `npm run typeorm migration:run`
-
 If you want to revert the migrations, you can run:
 
 ### `npm run typeorm migration:revert`
+
+## Populating Database With Test Data
+You can seed the database with fake data for testing purposes using the following command:
+
+### `npm run seed:run`

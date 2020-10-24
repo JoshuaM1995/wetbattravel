@@ -1,4 +1,3 @@
-// @ts-ignore
 const express = require('express');
 const bodyParser = require('body-parser');
 const compress = require('compression');

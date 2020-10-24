@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
-@Entity()
+@Entity({name: 'quotes'})
 export class Quote {
     @PrimaryGeneratedColumn()
     id: number;
@@ -15,10 +15,10 @@ export class Quote {
     depart_destination: string;
 
     @Column()
-    origin_datetime: string;
+    origin_datetime: Date;
 
     @Column()
-    destination_datetime: string;
+    destination_datetime: Date;
 
     @Column()
     number_people: number;
