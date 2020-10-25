@@ -23,11 +23,12 @@ Open http://localhost:4000/api/v1 to access the API root.
 This application uses [PostgreSQL](https://www.postgresql.org/download/) for the database. Once it's downloaded and setup on your machine, you can create a database and user, then copy the **/api/.env.example** file to the **/api/.env** and enter the appropriate information.
 
 ```
-DB_USERNAME=myuser
-DB_PASSWORD=My$up3r$tr0ngPassw0rd
-DB_DATABASE=mydatabasename
-DB_HOST=localhost
-DB_PORT=5432
+TYPEORM_CONNECTION=postgres
+TYPEORM_HOST=localhost
+TYPEORM_USERNAME=myuser
+TYPEORM_PASSWORD=My$up3r$tr0ngPassw0rd
+TYPEORM_DATABASE=mydatabasename
+TYPEORM_PORT=5432
 ```
 
 ## Creating Database Schema
@@ -42,3 +43,13 @@ If you want to revert the migrations, you can run:
 You can seed the database with fake data for testing purposes using the following command:
 
 ### `npm run seed:run`
+
+# Structural Decisions
+
+For the backend API I used **ExpressJS** as it's the module I'm most familiar with, and it's the most used. Even though 
+I've never used it before, I decided to try out the **TypeORM** module for connecting to the database. I usually use raw 
+SQL or the **sequelize** module in projects, but I had heard about TypeORM before and wanted to try it since it 
+integrates nicely with TypeScript.
+
+For the Component UI Library I kept it simple and went with [Material UI](https://material-ui.com/) as it's what I'm 
+familiar with. I've used other libraries in the past such as **react-bootstrap**, **semantic-ui** and **react-suite**.
