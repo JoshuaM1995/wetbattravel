@@ -17,19 +17,19 @@ export class QuoteMigration1603558760952 implements MigrationInterface {
           type: 'varchar',
         },
         {
-          name: 'depart_origin',
+          name: 'origin',
           type: 'varchar',
         },
         {
-          name: 'depart_destination',
+          name: 'destination',
           type: 'varchar',
         },
         {
-          name: 'origin_datetime',
+          name: 'depart_datetime',
           type: 'timestamp',
         },
         {
-          name: 'destination_datetime',
+          name: 'return_datetime',
           type: 'timestamp',
         },
         {

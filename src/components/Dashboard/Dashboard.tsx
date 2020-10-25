@@ -15,10 +15,10 @@ import {Alert} from "@material-ui/lab";
 import {FormikProps} from "formik";
 
 const initialValues: InitialQuoteFormValues = {
-  depart_origin: '',
-  depart_destination: '',
-  origin_datetime: '',
-  destination_datetime: '',
+  origin: '',
+  destination: '',
+  depart_datetime: '',
+  return_datetime: '',
   number_people: 1,
   transportation: TransportationType.CAR,
   name: '',

@@ -43,15 +43,15 @@ const ViewQuote = () => {
                   <br/>
                   <Grid container spacing={3}>
                     <Grid item sm={12} md={6}>
-                      <Typography variant="body1">Depart From: {quoteResponse?.data?.quote.depart_origin}</Typography>
+                      <Typography variant="body1">Depart From: {quoteResponse?.data?.quote.origin}</Typography>
                       <Typography variant="body1">
-                        Departure Time: {moment(quoteResponse?.data?.quote.origin_datetime).format(dateFormat)}
+                        Departure Time: {moment(quoteResponse?.data?.quote.depart_datetime).format(dateFormat)}
                       </Typography>
                     </Grid>
                     <Grid item sm={12} md={6}>
-                      <Typography variant="body1">Arrive At: {quoteResponse?.data?.quote.depart_destination}</Typography>
+                      <Typography variant="body1">Arrive At: {quoteResponse?.data?.quote.destination}</Typography>
                       <Typography variant="body1">
-                        Arrival Time: {moment(quoteResponse?.data?.quote.destination_datetime).format(dateFormat)}
+                        Return Time: {moment(quoteResponse?.data?.quote.return_datetime).format(dateFormat)}
                       </Typography>
                     </Grid>
                   </Grid>
@@ -89,8 +89,8 @@ const ViewQuote = () => {
               <CardContent>
                 <Typography variant="body1">
                   Based on the average cost of flights, the price to fly
-                  between {quoteResponse?.data?.quote.depart_origin}
-                  {' '} and {quoteResponse?.data?.quote.depart_destination} is {' '}
+                  between {quoteResponse?.data?.quote.origin}
+                  {' '} and {quoteResponse?.data?.quote.destination} is {' '}
                   <Chip
                       className="chip-money"
                       label={<b>{currencyFormatter.format(quoteResponse?.data?.quote.price ?? 0)}</b>}

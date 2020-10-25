@@ -27,7 +27,7 @@ const PendingQuotesTable = ({ tableRows }: PendingQuotesTableProps) => {
             <TableRow key={row.id}>
               <TableCell component="th" scope="row">{row.id}</TableCell>
               <TableCell>{row.name}</TableCell>
-              <TableCell>{row.depart_destination}</TableCell>
+              <TableCell>{row.destination}</TableCell>
               <TableCell>{currencyFormatter.format(row.price)}</TableCell>
               <TableCell>
                 <Link to={`/quote/${row.id}`}>

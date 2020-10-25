@@ -3,9 +3,9 @@ import moment from 'moment';
 import {InitialQuoteFormValues} from "../utils/interfaces";
 
 export const createQuoteSchema = Yup.object().shape<InitialQuoteFormValues>({
-  depart_destination: Yup.string().required('This field is required'),
-  depart_origin: Yup.string().required('This field is required'),
-  origin_datetime: Yup.string()
+  destination: Yup.string().required('This field is required'),
+  origin: Yup.string().required('This field is required'),
+  depart_datetime: Yup.string()
     .test('origin_datetime_before_destination_datetime',
       'The departure date must be before the destination date',
       function (date) {
@@ -13,9 +13,9 @@ export const createQuoteSchema = Yup.object().shape<InitialQuoteFormValues>({
       },
     )
     .required('This field is required'),
-  destination_datetime: Yup.string()
+  return_datetime: Yup.string()
     .test('destination_datetime_after_origin_datetime',
-      'The departure date must be before the destination date',
+      'The destination date must be after the departure date',
       function (date) {
         return moment(date).isAfter(moment(this.parent.origin_datetime));
       },

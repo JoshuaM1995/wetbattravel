@@ -76,27 +76,27 @@ const QuickQuoteForm = ({initialValues, onSubmit, formSubmitted}: QuickQuoteProp
             <Form>
               <Grid container spacing={3}>
                 <Grid item xs={12} sm={6}>
-                  <Field name="depart_origin">
+                  <Field name="origin">
                     {({field}: FieldProps) => (
                       <>
                         <TextField
                           {...field}
-                          error={!!errors.depart_origin}
+                          error={!!errors.origin}
                           label="From"
                           variant="outlined"
                         />
-                        {errors.depart_origin && <FormHelperText error>{errors.depart_origin}</FormHelperText>}
+                        {errors.origin && <FormHelperText error>{errors.origin}</FormHelperText>}
                       </>
                     )}
                   </Field>
                 </Grid>
 
                 <Grid item xs={12} sm={6}>
-                  <Field name="depart_destination">
+                  <Field name="destination">
                     {({field}: FieldProps) => (
                       <TextField
                         {...field}
-                        error={!!errors.depart_destination}
+                        error={!!errors.destination}
                         label="Destination"
                         variant="outlined"
                       />
@@ -105,11 +105,11 @@ const QuickQuoteForm = ({initialValues, onSubmit, formSubmitted}: QuickQuoteProp
                 </Grid>
 
                 <Grid item xs={12} sm={6}>
-                  <Field name="origin_datetime">
+                  <Field name="depart_datetime">
                     {({field}: FieldProps) => (
                       <TextField
                         {...field}
-                        error={!!errors.origin_datetime}
+                        error={!!errors.depart_datetime}
                         label="Depart Date"
                         type="datetime-local"
                         InputLabelProps={{
@@ -122,12 +122,12 @@ const QuickQuoteForm = ({initialValues, onSubmit, formSubmitted}: QuickQuoteProp
                 </Grid>
 
                 <Grid item xs={12} sm={6}>
-                  <Field name="destination_datetime">
+                  <Field name="return_datetime">
                     {({field}: FieldProps) => (
                       <TextField
                         {...field}
-                        error={!!errors.destination_datetime}
-                        label="Depart Date"
+                        error={!!errors.return_datetime}
+                        label="Return Date"
                         type="datetime-local"
                         InputLabelProps={{
                           shrink: true,

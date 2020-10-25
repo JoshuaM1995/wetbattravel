@@ -9,16 +9,16 @@ export class Quote {
     name: string;
 
     @Column()
-    depart_origin: string;
+    origin: string;
 
     @Column()
-    depart_destination: string;
+    destination: string;
 
     @Column()
-    origin_datetime: Date;
+    depart_datetime: Date;
 
     @Column()
-    destination_datetime: Date;
+    return_datetime: Date;
 
     @Column()
     number_people: number;
