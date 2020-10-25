@@ -73,7 +73,7 @@ const Dashboard = () => {
       </Grid>
 
       <Grid item sm={12} md={6}>
-        <Card variant="outlined">
+        <Card className="card-pending-quotes" variant="outlined">
           <CardHeader title={<><HistoryOutlinedIcon fontSize="large" />Pending Quotes</>} titleTypographyProps={{ color: 'primary' }} />
           <CardContent>
             <PendingQuotesTable tableRows={tableRows} />

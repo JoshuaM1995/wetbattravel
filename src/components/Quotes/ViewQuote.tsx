@@ -10,7 +10,7 @@ import currencyFormatter from "../../utils/currencyFormatter";
 import './ViewQuote.scss';
 import moment from 'moment';
 
-const dateFormat = 'MMMM Do, YYYY';
+const dateFormat = 'MMMM Do, YYYY [at] hh:mm A';
 
 const ViewQuote = () => {
   const {id} = useParams<any>();
