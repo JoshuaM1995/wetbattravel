@@ -49,6 +49,6 @@ export class QuoteMigration1603558760952 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('quotes');
+    await queryRunner.dropTable('quotes', true);
   }
 }
