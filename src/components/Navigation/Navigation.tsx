@@ -195,7 +195,7 @@ const Navigation = () => {
           </div>
           <div className={classes.sectionDesktop}>
             <IconButton aria-label="show 4 new mails" color="inherit">
-              <Badge badgeContent={4} color="secondary">
+              <Badge badgeContent={4} color="error">
                 <MailIcon/>
               </Badge>
             </IconButton>
