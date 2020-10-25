@@ -36,7 +36,6 @@ server.get('/api/quotes', async (req: Request, res: Response) => {
 server.get('/api/quote/:id', async (req: Request, res: Response) => {
   const quote = await quoteController.one(req);
 
-  console.info('quote', quote);
   if (typeof quote === 'undefined') {
     res.status(404);
     res.json({error: 'Not found'});

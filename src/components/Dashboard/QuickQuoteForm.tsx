@@ -12,8 +12,8 @@ import {
 } from '@material-ui/core';
 import {Field, FieldProps, Form, Formik, FormikProps} from "formik";
 import {InitialQuoteFormValues} from '../../utils/interfaces';
-import {createQuoteSchema} from '../../validation/CreateQuoteSchema';
 import {Alert} from '@material-ui/lab';
+import {createQuoteSchema} from "../../validation/createQuoteSchema";
 
 interface QuickQuoteProps {
   initialValues: InitialQuoteFormValues;
