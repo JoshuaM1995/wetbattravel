@@ -9,6 +9,8 @@ import useApiRequest from "../../hooks/useApiRequest";
 import {QuotesResponse} from "../../../api/interfaces/quotes";
 import {Quote} from "../../../api/entities/Quote";
 import apiRequest from "../../utils/apiRequest";
+import FastForwardOutlinedIcon from '@material-ui/icons/FastForwardOutlined';
+import HistoryOutlinedIcon from '@material-ui/icons/HistoryOutlined';
 
 const initialValues: InitialQuoteFormValues = {
   depart_origin: '',
@@ -59,7 +61,7 @@ const Dashboard = () => {
     <Grid container spacing={3}>
       <Grid item sm={12} md={6}>
         <Card className="card-quick-quote" variant="outlined">
-          <CardHeader title="Quick Quote" />
+          <CardHeader title={<><FastForwardOutlinedIcon fontSize="large" />Quick Quote</>} titleTypographyProps={{ color: 'primary' }} />
           <CardContent>
             <QuickQuoteForm
               initialValues={initialValues}
@@ -71,8 +73,8 @@ const Dashboard = () => {
       </Grid>
 
       <Grid item sm={12} md={6}>
-        <Card className="card-quick-quote" variant="outlined">
-          <CardHeader title="Pending Quotes" />
+        <Card variant="outlined">
+          <CardHeader title={<><HistoryOutlinedIcon fontSize="large" />Pending Quotes</>} titleTypographyProps={{ color: 'primary' }} />
           <CardContent>
             <PendingQuotesTable tableRows={tableRows} />
           </CardContent>

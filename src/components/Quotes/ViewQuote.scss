@@ -1,0 +1,12 @@
+@import '../../scss/variables';
+
+.quote-detail {
+  background: $color-grey !important;
+  padding: 15px;
+}
+
+.quote-pricing {
+  @media only screen and (min-width: 960px) {
+    height: 367px;
+  }
+}

@@ -3,11 +3,7 @@ import {Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow}
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import { Quote } from '../../../api/entities/Quote';
 import {Link} from "react-router-dom";
-
-const currencyFormatter = new Intl.NumberFormat('en-US', {
-  style: 'currency',
-  currency: 'CAD'
-});
+import currencyFormatter from "../../utils/currencyFormatter";
 
 interface PendingQuotesTableProps {
   tableRows: any[];
@@ -16,7 +12,7 @@ interface PendingQuotesTableProps {
 const PendingQuotesTable = ({ tableRows }: PendingQuotesTableProps) => {
   return (
     <TableContainer component={Paper}>
-      <Table>
+      <Table size="small">
         <TableHead>
           <TableRow>
             <TableCell>ID #</TableCell>
@@ -35,7 +31,7 @@ const PendingQuotesTable = ({ tableRows }: PendingQuotesTableProps) => {
               <TableCell>{currencyFormatter.format(row.price)}</TableCell>
               <TableCell>
                 <Link to={`/quote/${row.id}`}>
-                  <VisibilityIcon color="primary" />
+                  <VisibilityIcon color="secondary" />
                 </Link>
               </TableCell>
             </TableRow>

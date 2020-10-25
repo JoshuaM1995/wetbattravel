@@ -39,12 +39,7 @@ function useApiRequest<Response = any>(
     }).finally(() => {
       setIsLoading(false);
     });
-
-    // Clean up the axios request in case the useEffect ends prematurely
-    return () => {
-      source.cancel();
-    };
-  }, []);
+  }, [body, method, url]);
 
   return { response, error, isLoading };
 }

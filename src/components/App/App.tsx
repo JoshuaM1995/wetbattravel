@@ -1,15 +1,27 @@
 import React from 'react';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import {Container} from '@material-ui/core';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import Navigation from '../Navigation/Navigation';
 import Dashboard from '../Dashboard/Dashboard';
 import NotFound from '../NotFound/NotFound';
-import './App.scss';
 import ViewQuote from "../Quotes/ViewQuote";
+import './App.scss';
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#5F6CAF',
+    },
+    secondary: {
+      main: '#5BBFBA',
+    },
+  },
+});
 
 const App = () => {
   return (
-    <>
+    <ThemeProvider theme={theme}>
       <BrowserRouter>
         <Navigation/>
 
@@ -22,7 +34,7 @@ const App = () => {
           </Switch>
         </Container>
       </BrowserRouter>
-    </>
+    </ThemeProvider>
   )
     ;
 }

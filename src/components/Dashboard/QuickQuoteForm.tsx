@@ -48,6 +48,7 @@ const QuickQuoteForm = ({initialValues, onSubmit, formSubmitted}: QuickQuoteProp
       onSubmit={onSubmit}
       validationSchema={createQuoteSchema}
       validateOnChange={false}
+      validateOnBlur={false}
     >
       {({errors, isValid}: FormikProps<InitialQuoteFormValues>) => {
         setIsFormValid(isValid);
@@ -197,7 +198,13 @@ const QuickQuoteForm = ({initialValues, onSubmit, formSubmitted}: QuickQuoteProp
                 </Grid>
 
                 <Grid item xs={12} sm={6}>
-                  <Button type="submit" variant="contained" color="primary" disableElevation>
+                  <Button
+                    className="create-a-quote"
+                    type="submit"
+                    variant="contained"
+                    color="secondary"
+                    disableElevation
+                  >
                     Create a quote
                   </Button>
                 </Grid>
