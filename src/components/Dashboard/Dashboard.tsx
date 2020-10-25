@@ -12,6 +12,7 @@ import apiRequest from "../../utils/apiRequest";
 import FastForwardOutlinedIcon from '@material-ui/icons/FastForwardOutlined';
 import HistoryOutlinedIcon from '@material-ui/icons/HistoryOutlined';
 import {Alert} from "@material-ui/lab";
+import {FormikProps} from "formik";
 
 const initialValues: InitialQuoteFormValues = {
   depart_origin: '',
@@ -36,8 +37,8 @@ const Dashboard = () => {
     }
   }, [quoteResponse]);
 
-  const createQuote = (values: InitialQuoteFormValues) => {
-    apiRequest('quote', ApiMethod.POST, values).then((response) => {
+  const createQuote = (values: InitialQuoteFormValues, { resetForm }: FormikProps<InitialQuoteFormValues>) => {
+    apiRequest('quotes', ApiMethod.POST, values).then((response) => {
       setTableRows((tableRows: any) => {
         // Remove the last item from the table to make room for the new one
         tableRows.pop();
@@ -49,6 +50,7 @@ const Dashboard = () => {
         ];
       });
       setFormSubmitted(true);
+      resetForm();
     }).catch(() => {
       setShowErrorAlert(true);
     });

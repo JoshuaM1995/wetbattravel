@@ -1,12 +1,10 @@
-import {Request, Response} from "express";
-import {QuoteController} from "./controllers/QuoteController";
+import quoteRouter from "./router/quoteRouter";
 
 const express = require('express');
 const bodyParser = require('body-parser');
 const compress = require('compression');
 const cors = require('cors');
 const helmet = require('helmet');
-const quoteController = new QuoteController();
 require('dotenv').config()
 
 /**
@@ -28,26 +26,8 @@ server.use(helmet());
 // enable CORS - Cross Origin Resource Sharing
 server.use(cors());
 
-server.get('/api/quotes', async (req: Request, res: Response) => {
-  const quotes = await quoteController.all();
-  res.json({quotes});
-});
-
-server.get('/api/quote/:id', async (req: Request, res: Response) => {
-  const quote = await quoteController.one(req);
-
-  if (typeof quote === 'undefined') {
-    res.status(404);
-    res.json({error: 'Not found'});
-  } else {
-    res.json({quote});
-  }
-});
-
-server.post('/api/quote/', async (req: Request, res: Response) => {
-  const quote = await quoteController.save(req);
-  res.json(quote);
-});
+// Register the quotes endpoint
+server.use('/api/quotes', quoteRouter)
 
 server.use('/*', (req: any, res: any) => {
   res.status(404);

@@ -16,7 +16,10 @@ const dateFormat = 'MMMM Do, YYYY [at] hh:mm A';
 
 const ViewQuote = () => {
   const {id} = useParams<any>();
-  const {response: quoteResponse, error: quoteError} = useApiRequest<QuoteResponse>(`/quote/${id}`, ApiMethod.GET);
+  const {response: quoteResponse, error: quoteError} = useApiRequest<QuoteResponse>(
+    `/quotes/${id}`,
+    ApiMethod.GET,
+  );
 
   return (
     <>
