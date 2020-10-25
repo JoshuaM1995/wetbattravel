@@ -6,21 +6,21 @@ export const createQuoteSchema = Yup.object().shape<InitialQuoteFormValues>({
   destination: Yup.string().required('This field is required'),
   origin: Yup.string().required('This field is required'),
   depart_datetime: Yup.string()
-    .test('origin_datetime_before_destination_datetime',
-      'The departure date must be before the destination date',
+    .required('This field is required')
+    .test('depart_datetime_before_return_datetime',
+      'The departure date must be before the return date',
       function (date) {
         return moment(date).isBefore(moment(this.parent.destination_datetime));
       },
-    )
-    .required('This field is required'),
+    ),
   return_datetime: Yup.string()
-    .test('destination_datetime_after_origin_datetime',
-      'The destination date must be after the departure date',
+    .required('This field is required')
+    .test('return_datetime_after_depart_datetime',
+      'The return date must be after the departure date',
       function (date) {
         return moment(date).isAfter(moment(this.parent.origin_datetime));
       },
-    )
-    .required('This field is required'),
+    ),
   number_people: Yup.number().required('This field is required'),
   transportation: Yup.string().required('This field is required'),
   name: Yup.string().required('This field is required'),

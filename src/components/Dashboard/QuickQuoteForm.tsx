@@ -24,7 +24,7 @@ interface QuickQuoteProps {
 const QuickQuoteForm = ({initialValues, onSubmit, formSubmitted}: QuickQuoteProps) => {
   const [showErrorAlert, setShowErrorAlert] = useState(false);
   const [showSuccessAlert, setShowSuccessAlert] = useState(false);
-  const [isFormValid, setIsFormValid] = useState<boolean|undefined>();
+  const [isFormValid, setIsFormValid] = useState<boolean | undefined>();
 
   useEffect(() => {
     if (formSubmitted && isFormValid) {
@@ -37,42 +37,42 @@ const QuickQuoteForm = ({initialValues, onSubmit, formSubmitted}: QuickQuoteProp
   }, [isFormValid, formSubmitted]);
 
   return (
-    <Formik
-      initialValues={initialValues}
-      onSubmit={onSubmit}
-      validationSchema={createQuoteSchema}
-      validateOnChange={false}
-      validateOnBlur={false}
-    >
-      {({errors, isValid}: FormikProps<InitialQuoteFormValues>) => {
-        setIsFormValid(isValid);
+    <>
+      <Snackbar
+        color="error"
+        anchorOrigin={{vertical: 'top', horizontal: 'right'}}
+        open={showErrorAlert}
+        onClose={() => setShowErrorAlert(false)}
+        autoHideDuration={5000}
+      >
+        <Alert severity="error">
+          There are one or more errors in the form. Please fix them and try again.
+        </Alert>
+      </Snackbar>
 
-        return (
-          <>
-            <Snackbar
-              color="error"
-              anchorOrigin={{vertical: 'top', horizontal: 'right'}}
-              open={showErrorAlert}
-              onClose={() => setShowErrorAlert(false)}
-              autoHideDuration={5000}
-            >
-              <Alert severity="error">
-                There are one or more errors in the form. Please fix them and try again.
-              </Alert>
-            </Snackbar>
+      <Snackbar
+        color="success"
+        anchorOrigin={{vertical: 'top', horizontal: 'right'}}
+        open={showSuccessAlert}
+        onClose={() => setShowSuccessAlert(false)}
+        autoHideDuration={5000}
+      >
+        <Alert severity="success">
+          Your quote was successfully created!
+        </Alert>
+      </Snackbar>
 
-            <Snackbar
-              color="success"
-              anchorOrigin={{vertical: 'top', horizontal: 'right'}}
-              open={showSuccessAlert}
-              onClose={() => setShowSuccessAlert(false)}
-              autoHideDuration={5000}
-            >
-              <Alert severity="success">
-                Your quote was successfully created!
-              </Alert>
-            </Snackbar>
+      <Formik
+        initialValues={initialValues}
+        onSubmit={onSubmit}
+        validationSchema={createQuoteSchema}
+        validateOnChange={false}
+        validateOnBlur={false}
+      >
+        {({errors, isValid}: FormikProps<InitialQuoteFormValues>) => {
+          setIsFormValid(isValid);
 
+          return (
             <Form>
               <Grid container spacing={3}>
                 <Grid item xs={12} sm={6}>
@@ -94,12 +94,15 @@ const QuickQuoteForm = ({initialValues, onSubmit, formSubmitted}: QuickQuoteProp
                 <Grid item xs={12} sm={6}>
                   <Field name="destination">
                     {({field}: FieldProps) => (
-                      <TextField
-                        {...field}
-                        error={!!errors.destination}
-                        label="Destination"
-                        variant="outlined"
-                      />
+                      <>
+                        <TextField
+                          {...field}
+                          error={!!errors.destination}
+                          label="Destination"
+                          variant="outlined"
+                        />
+                        {errors.destination && <FormHelperText error>{errors.destination}</FormHelperText>}
+                      </>
                     )}
                   </Field>
                 </Grid>
@@ -107,16 +110,19 @@ const QuickQuoteForm = ({initialValues, onSubmit, formSubmitted}: QuickQuoteProp
                 <Grid item xs={12} sm={6}>
                   <Field name="depart_datetime">
                     {({field}: FieldProps) => (
-                      <TextField
-                        {...field}
-                        error={!!errors.depart_datetime}
-                        label="Depart Date"
-                        type="datetime-local"
-                        InputLabelProps={{
-                          shrink: true,
-                        }}
-                        variant="outlined"
-                      />
+                      <>
+                        <TextField
+                          {...field}
+                          error={!!errors.depart_datetime}
+                          label="Depart Date"
+                          type="datetime-local"
+                          InputLabelProps={{
+                            shrink: true,
+                          }}
+                          variant="outlined"
+                        />
+                        {errors.depart_datetime && <FormHelperText error>{errors.depart_datetime}</FormHelperText>}
+                      </>
                     )}
                   </Field>
                 </Grid>
@@ -124,16 +130,19 @@ const QuickQuoteForm = ({initialValues, onSubmit, formSubmitted}: QuickQuoteProp
                 <Grid item xs={12} sm={6}>
                   <Field name="return_datetime">
                     {({field}: FieldProps) => (
-                      <TextField
-                        {...field}
-                        error={!!errors.return_datetime}
-                        label="Return Date"
-                        type="datetime-local"
-                        InputLabelProps={{
-                          shrink: true,
-                        }}
-                        variant="outlined"
-                      />
+                      <>
+                        <TextField
+                          {...field}
+                          error={!!errors.return_datetime}
+                          label="Return Date"
+                          type="datetime-local"
+                          InputLabelProps={{
+                            shrink: true,
+                          }}
+                          variant="outlined"
+                        />
+                        {errors.return_datetime && <FormHelperText error>{errors.return_datetime}</FormHelperText>}
+                      </>
                     )}
                   </Field>
                 </Grid>
@@ -153,6 +162,7 @@ const QuickQuoteForm = ({initialValues, onSubmit, formSubmitted}: QuickQuoteProp
                             <MenuItem value={num} key={num}>{num}</MenuItem>
                           ))}
                         </Select>
+                        {errors.number_people && <FormHelperText error>{errors.number_people}</FormHelperText>}
                       </FormControl>
                     )}
                   </Field>
@@ -163,16 +173,19 @@ const QuickQuoteForm = ({initialValues, onSubmit, formSubmitted}: QuickQuoteProp
                     <InputLabel id="label-transportation">Transportation</InputLabel>
                     <Field name="transportation">
                       {({field}: FieldProps) => (
-                        <Select
-                          {...field}
-                          label="Transportation"
-                          labelId="label-transportation"
-                          variant="outlined"
-                        >
-                          {Object.values(TransportationType).map((transportationType: string, key: number) => (
-                            <MenuItem value={transportationType} key={key}>{transportationType}</MenuItem>
-                          ))}
-                        </Select>
+                        <>
+                          <Select
+                            {...field}
+                            label="Transportation"
+                            labelId="label-transportation"
+                            variant="outlined"
+                          >
+                            {Object.values(TransportationType).map((transportationType: string, key: number) => (
+                              <MenuItem value={transportationType} key={key}>{transportationType}</MenuItem>
+                            ))}
+                          </Select>
+                          {errors.transportation && <FormHelperText error>{errors.transportation}</FormHelperText>}
+                        </>
                       )}
                     </Field>
                   </FormControl>
@@ -181,12 +194,15 @@ const QuickQuoteForm = ({initialValues, onSubmit, formSubmitted}: QuickQuoteProp
                 <Grid item xs={12} sm={6}>
                   <Field name="name">
                     {({field}: FieldProps) => (
-                      <TextField
-                        {...field}
-                        error={!!errors.name}
-                        label="Name"
-                        variant="outlined"
-                      />
+                      <>
+                        <TextField
+                          {...field}
+                          error={!!errors.name}
+                          label="Name"
+                          variant="outlined"
+                        />
+                        {errors.name && <FormHelperText error>{errors.name}</FormHelperText>}
+                      </>
                     )}
                   </Field>
                 </Grid>
@@ -204,10 +220,10 @@ const QuickQuoteForm = ({initialValues, onSubmit, formSubmitted}: QuickQuoteProp
                 </Grid>
               </Grid>
             </Form>
-          </>
-        );
-      }}
-    </Formik>
+          );
+        }}
+      </Formik>
+    </>
   );
 };
 
