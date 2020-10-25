@@ -63,7 +63,10 @@ const ViewQuote = () => {
                   <br/>
                   <Grid container spacing={3}>
                     <Grid item sm={12} md={6}>
-                      <Typography variant="body1">Name: {quoteResponse?.data?.quote.name}</Typography>
+                      <Typography variant="body1">
+                        Name: {quoteResponse?.data?.quote.name}<br />
+                        Transportation Type: {quoteResponse?.data?.quote.transportation}
+                      </Typography>
                     </Grid>
 
                     <Grid item sm={12} md={6}>
