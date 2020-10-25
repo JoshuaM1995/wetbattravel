@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Card, CardContent, CardHeader, Grid} from '@material-ui/core';
+import {Card, CardContent, CardHeader, Grid, Snackbar} from '@material-ui/core';
 import './Dashboard.scss';
 import {ApiMethod, TransportationType} from '../../utils/enums';
 import QuickQuoteForm from './QuickQuoteForm';
@@ -11,6 +11,7 @@ import {Quote} from "../../../api/entities/Quote";
 import apiRequest from "../../utils/apiRequest";
 import FastForwardOutlinedIcon from '@material-ui/icons/FastForwardOutlined';
 import HistoryOutlinedIcon from '@material-ui/icons/HistoryOutlined';
+import {Alert} from "@material-ui/lab";
 
 const initialValues: InitialQuoteFormValues = {
   depart_origin: '',
@@ -25,6 +26,7 @@ const initialValues: InitialQuoteFormValues = {
 const Dashboard = () => {
   const [ tableRows, setTableRows ] = useState<Quote[]>([]);
   const [ formSubmitted, setFormSubmitted ] = useState(false);
+  const [showErrorAlert, setShowErrorAlert] = useState(false);
   const { response: quoteResponse } = useApiRequest<QuotesResponse>('quotes', ApiMethod.GET);
 
   useEffect(() => {
@@ -47,21 +49,31 @@ const Dashboard = () => {
         ];
       });
       setFormSubmitted(true);
-
-      // Set the form submitted to false after 5 seconds to get rid of the success message
-      setTimeout(() => {
-        setFormSubmitted(false);
-      }, 5000);
-    }).catch((error) => {
-      console.error('Create quote error', error);
+    }).catch(() => {
+      setShowErrorAlert(true);
     });
   };
 
   return (
     <Grid container spacing={3}>
+      <Snackbar
+        color="error"
+        anchorOrigin={{vertical: 'top', horizontal: 'right'}}
+        open={showErrorAlert}
+        onClose={() => setShowErrorAlert(false)}
+        autoHideDuration={5000}
+      >
+        <Alert severity="error">
+          There was an error when trying to create your quote. Please try again.
+        </Alert>
+      </Snackbar>
+
       <Grid item sm={12} md={6}>
         <Card className="card-quick-quote" variant="outlined">
-          <CardHeader title={<><FastForwardOutlinedIcon fontSize="large" />Quick Quote</>} titleTypographyProps={{ color: 'primary' }} />
+          <CardHeader
+            title={<><FastForwardOutlinedIcon fontSize="large" />Quick Quote</>}
+            titleTypographyProps={{ color: 'primary' }}
+          />
           <CardContent>
             <QuickQuoteForm
               initialValues={initialValues}
@@ -74,7 +86,10 @@ const Dashboard = () => {
 
       <Grid item sm={12} md={6}>
         <Card className="card-pending-quotes" variant="outlined">
-          <CardHeader title={<><HistoryOutlinedIcon fontSize="large" />Pending Quotes</>} titleTypographyProps={{ color: 'primary' }} />
+          <CardHeader
+            title={<><HistoryOutlinedIcon fontSize="large" />Pending Quotes</>}
+            titleTypographyProps={{ color: 'primary' }}
+          />
           <CardContent>
             <PendingQuotesTable tableRows={tableRows} />
           </CardContent>

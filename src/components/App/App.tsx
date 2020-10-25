@@ -35,8 +35,7 @@ const App = () => {
         </Container>
       </BrowserRouter>
     </ThemeProvider>
-  )
-    ;
+  );
 }
 
 export default App;

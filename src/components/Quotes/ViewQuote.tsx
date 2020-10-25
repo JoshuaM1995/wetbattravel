@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {Card, CardContent, CardHeader, Chip, Grid, Paper, Typography} from '@material-ui/core';
 import useApiRequest from "../../hooks/useApiRequest";
 import {ApiMethod} from "../../utils/enums";

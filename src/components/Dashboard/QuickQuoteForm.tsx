@@ -1,17 +1,19 @@
 import React, {useEffect, useState} from 'react';
 import {TransportationType} from "../../utils/enums";
 import {
-  Button, FormControl, FormHelperText,
+  Button,
+  FormControl,
+  FormHelperText,
   Grid,
   InputLabel,
   MenuItem,
   Select, Snackbar,
   TextField,
 } from '@material-ui/core';
-import {Field, FieldProps, Form, Formik, FormikErrors, FormikProps} from "formik";
+import {Field, FieldProps, Form, Formik, FormikProps} from "formik";
 import {InitialQuoteFormValues} from '../../utils/interfaces';
 import {createQuoteSchema} from '../../validation/CreateQuoteSchema';
-import {Alert} from "@material-ui/lab";
+import {Alert} from '@material-ui/lab';
 
 interface QuickQuoteProps {
   initialValues: InitialQuoteFormValues;
@@ -34,14 +36,6 @@ const QuickQuoteForm = ({initialValues, onSubmit, formSubmitted}: QuickQuoteProp
     }
   }, [isFormValid, formSubmitted]);
 
-  const handleErrorAlertClose = () => {
-    setShowErrorAlert(false);
-  };
-
-  const handleSuccessAlertClose = () => {
-    setShowSuccessAlert(false);
-  };
-
   return (
     <Formik
       initialValues={initialValues}
@@ -59,7 +53,7 @@ const QuickQuoteForm = ({initialValues, onSubmit, formSubmitted}: QuickQuoteProp
               color="error"
               anchorOrigin={{vertical: 'top', horizontal: 'right'}}
               open={showErrorAlert}
-              onClose={handleErrorAlertClose}
+              onClose={() => setShowErrorAlert(false)}
               autoHideDuration={5000}
             >
               <Alert severity="error">
@@ -71,7 +65,7 @@ const QuickQuoteForm = ({initialValues, onSubmit, formSubmitted}: QuickQuoteProp
               color="success"
               anchorOrigin={{vertical: 'top', horizontal: 'right'}}
               open={showSuccessAlert}
-              onClose={handleSuccessAlertClose}
+              onClose={() => setShowSuccessAlert(false)}
               autoHideDuration={5000}
             >
               <Alert severity="success">

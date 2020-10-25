@@ -1,6 +1,6 @@
 export enum TransportationType {
-  RENTAL = 'Rental',
   CAR = 'Car',
+  RENTAL = 'Rental',
 }
 
 export enum ApiMethod {
