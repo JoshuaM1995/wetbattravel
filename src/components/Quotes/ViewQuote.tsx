@@ -88,7 +88,10 @@ const ViewQuote = () => {
                   Based on the average cost of flights, the price to fly
                   between {quoteResponse?.data?.quote.depart_origin}
                   {' '} and {quoteResponse?.data?.quote.depart_destination} is {' '}
-                  <Chip label={<b>{currencyFormatter.format(quoteResponse?.data?.quote.price ?? 0)}</b>}/>
+                  <Chip
+                      className="chip-money"
+                      label={<b>{currencyFormatter.format(quoteResponse?.data?.quote.price ?? 0)}</b>}
+                  />
                   {' '} on average.
                 </Typography>
               </CardContent>

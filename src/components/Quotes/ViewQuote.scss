@@ -6,6 +6,11 @@
 }
 
 .quote-pricing {
+  .chip-money {
+    color: #fff;
+    background: $color-green-medium;
+  }
+
   @media only screen and (min-width: 960px) {
     height: 367px;
   }

@@ -1,39 +1,59 @@
 @import '../../scss/variables';
 
-.MuiCard-root {
-  .MuiSvgIcon-root {
-    color: $color-secondary;
-    position: relative;
-    top: 8px;
-    margin-right: 10px;
+.MuiGrid-root {
+  // Fix for cards not spanning full-width on mobile
+  @media only screen and (max-width: 960px) {
+    width: 100%;
+    margin: 0;
   }
 
-  .MuiFormControl-root, .MuiInputBase-root {
-    width: 100% !important;
-    margin-bottom: 30px;
+  .MuiCard-root {
+    .MuiSvgIcon-root {
+      color: $color-secondary;
+      position: relative;
+      top: 8px;
+      margin-right: 10px;
+    }
 
-    input {
-      background: $color-grey;
-      &:focus {
-        background: #fff;
+    .MuiFormControl-root, .MuiInputBase-root {
+      width: 100% !important;
+      margin-bottom: 30px;
+
+      input {
+        background: $color-grey;
+        &:focus {
+          background: #fff;
+        }
+      }
+
+      &:last-of-type {
+        margin-bottom: 0;
       }
     }
 
-    &:last-of-type {
-      margin-bottom: 0;
+    .create-a-quote {
+      color: #fff;
+      width: 100%;
+      height: 56px;
+      border-radius: 28px;
+      text-transform: none;
+      font-size: 1.1rem;
     }
-  }
 
-  .create-a-quote {
-    color: #fff;
-    width: 100%;
-    height: 56px;
-    border-radius: 28px;
-    text-transform: none;
-    font-size: 1.1rem;
-  }
+    &.card-pending-quotes {
+      min-height: 413px;
 
-  &.card-pending-quotes {
-    min-height: 413px;
+      .MuiTableContainer-root {
+        box-shadow: none !important;
+
+        table {
+          tr {
+            td, th {
+              border: none !important;
+            }
+          }
+        }
+      }
+    }
   }
 }
