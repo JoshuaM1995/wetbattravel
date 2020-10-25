@@ -26,10 +26,8 @@ const QuickQuoteForm = ({initialValues, onSubmit}: QuickQuoteProps) => {
       initialValues={initialValues}
       onSubmit={onSubmit}
       validationSchema={createQuoteSchema}
-      validateOnChange={false}
-      validateOnBlur={false}
     >
-      {({errors}: FormikProps<InitialQuoteFormValues>) => {
+      {({errors, touched}: FormikProps<InitialQuoteFormValues>) => {
         return (
           <Form>
             <Grid container spacing={3}>
@@ -39,11 +37,11 @@ const QuickQuoteForm = ({initialValues, onSubmit}: QuickQuoteProps) => {
                     <>
                       <TextField
                         {...field}
-                        error={!!errors.origin}
+                        error={!!(errors.origin && touched.origin)}
                         label="From"
                         variant="outlined"
                       />
-                      {errors.origin && <FormHelperText error>{errors.origin}</FormHelperText>}
+                      {(errors.origin && touched.origin) && <FormHelperText error>{errors.origin}</FormHelperText>}
                     </>
                   )}
                 </Field>
@@ -55,11 +53,13 @@ const QuickQuoteForm = ({initialValues, onSubmit}: QuickQuoteProps) => {
                     <>
                       <TextField
                         {...field}
-                        error={!!errors.destination}
+                        error={!!errors.destination && touched.destination}
                         label="Destination"
                         variant="outlined"
                       />
-                      {errors.destination && <FormHelperText error>{errors.destination}</FormHelperText>}
+                      {(touched.destination && errors.destination) &&
+                      <FormHelperText error>{errors.destination}</FormHelperText>
+                      }
                     </>
                   )}
                 </Field>
@@ -71,7 +71,7 @@ const QuickQuoteForm = ({initialValues, onSubmit}: QuickQuoteProps) => {
                     <>
                       <TextField
                         {...field}
-                        error={!!errors.depart_datetime}
+                        error={!!errors.depart_datetime && touched.depart_datetime}
                         label="Depart Date"
                         type="datetime-local"
                         InputLabelProps={{
@@ -79,7 +79,9 @@ const QuickQuoteForm = ({initialValues, onSubmit}: QuickQuoteProps) => {
                         }}
                         variant="outlined"
                       />
-                      {errors.depart_datetime && <FormHelperText error>{errors.depart_datetime}</FormHelperText>}
+                      {(touched.depart_datetime && errors.depart_datetime) &&
+                      <FormHelperText error>{errors.depart_datetime}</FormHelperText>
+                      }
                     </>
                   )}
                 </Field>
@@ -91,7 +93,7 @@ const QuickQuoteForm = ({initialValues, onSubmit}: QuickQuoteProps) => {
                     <>
                       <TextField
                         {...field}
-                        error={!!errors.return_datetime}
+                        error={!!errors.return_datetime && touched.return_datetime}
                         label="Return Date"
                         type="datetime-local"
                         InputLabelProps={{
@@ -99,7 +101,9 @@ const QuickQuoteForm = ({initialValues, onSubmit}: QuickQuoteProps) => {
                         }}
                         variant="outlined"
                       />
-                      {errors.return_datetime && <FormHelperText error>{errors.return_datetime}</FormHelperText>}
+                      {(touched.return_datetime && errors.return_datetime) &&
+                      <FormHelperText error>{errors.return_datetime}</FormHelperText>
+                      }
                     </>
                   )}
                 </Field>
@@ -108,7 +112,7 @@ const QuickQuoteForm = ({initialValues, onSubmit}: QuickQuoteProps) => {
               <Grid item xs={12} sm={6}>
                 <Field name="number_people">
                   {({field}: FieldProps) => (
-                    <FormControl error={!!errors.number_people}>
+                    <FormControl error={!!errors.number_people && touched.number_people}>
                       <InputLabel id="label-people">People</InputLabel>
                       <Select
                         {...field}
@@ -120,14 +124,16 @@ const QuickQuoteForm = ({initialValues, onSubmit}: QuickQuoteProps) => {
                           <MenuItem value={num} key={num}>{num}</MenuItem>
                         ))}
                       </Select>
-                      {errors.number_people && <FormHelperText error>{errors.number_people}</FormHelperText>}
+                      {(touched.number_people && errors.number_people) &&
+                      <FormHelperText error>{errors.number_people}</FormHelperText>
+                      }
                     </FormControl>
                   )}
                 </Field>
               </Grid>
 
               <Grid item xs={12} sm={6}>
-                <FormControl error={!!errors.transportation}>
+                <FormControl error={!!errors.transportation && touched.transportation}>
                   <InputLabel id="label-transportation">Transportation</InputLabel>
                   <Field name="transportation">
                     {({field}: FieldProps) => (
@@ -142,7 +148,9 @@ const QuickQuoteForm = ({initialValues, onSubmit}: QuickQuoteProps) => {
                             <MenuItem value={transportationType} key={key}>{transportationType}</MenuItem>
                           ))}
                         </Select>
-                        {errors.transportation && <FormHelperText error>{errors.transportation}</FormHelperText>}
+                        {(touched.transportation && errors.transportation) &&
+                        <FormHelperText error>{errors.transportation}</FormHelperText>
+                        }
                       </>
                     )}
                   </Field>
@@ -155,11 +163,13 @@ const QuickQuoteForm = ({initialValues, onSubmit}: QuickQuoteProps) => {
                     <>
                       <TextField
                         {...field}
-                        error={!!errors.name}
+                        error={!!errors.name && touched.name}
                         label="Name"
                         variant="outlined"
                       />
-                      {errors.name && <FormHelperText error>{errors.name}</FormHelperText>}
+                      {(touched.name && errors.name) &&
+                      <FormHelperText error>{errors.name}</FormHelperText>
+                      }
                     </>
                   )}
                 </Field>
