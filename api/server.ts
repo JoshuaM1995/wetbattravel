@@ -17,7 +17,7 @@ const server = express();
 
 // parse body params and attache them to req.body
 server.use(bodyParser.json());
-server.use(bodyParser.urlencoded({ extended: true }));
+server.use(bodyParser.urlencoded({extended: true}));
 
 // gzip compression
 server.use(compress());
@@ -30,12 +30,19 @@ server.use(cors());
 
 server.get('/api/quotes', async (req: Request, res: Response) => {
   const quotes = await quoteController.all();
-  res.json({ quotes });
+  res.json({quotes});
 });
 
 server.get('/api/quote/:id', async (req: Request, res: Response) => {
   const quote = await quoteController.one(req);
-  res.json({ quote });
+
+  console.info('quote', quote);
+  if (typeof quote === 'undefined') {
+    res.status(404);
+    res.json({error: 'Not found'});
+  } else {
+    res.json({quote});
+  }
 });
 
 server.post('/api/quote/', async (req: Request, res: Response) => {
@@ -45,7 +52,7 @@ server.post('/api/quote/', async (req: Request, res: Response) => {
 
 server.use('/*', (req: any, res: any) => {
   res.status(404);
-  res.json({ error: 'Not found' });
+  res.json({error: 'Not found'});
 });
 
 require('reflect-metadata');
