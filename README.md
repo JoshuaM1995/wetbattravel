@@ -1,5 +1,10 @@
 # Getting Started with Wet Bat Travel
 
+## Setup
+In the root directory and **/api/** install the modules:
+
+### `npm install`
+
 ## Available Scripts
 
 In the project directory, you can run:
